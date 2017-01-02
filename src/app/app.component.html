@@ -1,0 +1,117 @@
+<div>
+  <div class="card-deck-wrapper">
+    <div class="card-deck">
+    	<div class="card col-sm-6" *ngFor="let bike of bikes | async">
+        <img class="card-img-top" src="{{bike.imgUrl}}">
+        <div class="card-block">
+          <h4 class="card-title">{{bike.brand}}</h4>
+          <p class="card-text">{{bike.model}}</p>
+        </div>
+        <div class="card-block">
+          <ul class="list-group list-group-flush">
+              <li class="list-group-item">
+                <strong>Year - </strong>
+                <span>{{bike.year}}</span>
+              </li>
+              <li class="list-group-item">
+                <strong>Size - </strong>
+                <span>{{bike.size}}</span>
+              </li>
+              <li class="list-group-item">
+                <span>${{bike.price}}.00</span>
+              </li>
+          </ul>
+        </div>
+        <div class="card-block btn-block">
+    	     <button class="btn btn-default" (click)="updateBike(bike)">Update</button>
+    	     <button class="btn btn-default" (click)="deleteItem(bike.$key)">Delete</button>
+        </div>
+    	</div>
+      <div class="card col-sm-6">
+        <button class="btn btn-success add-btn" (click)="addBike()"><div>+</div>Add</button>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="selectedBike" class="modal-wrap">
+    <div class="block modal-content">
+      <button class="btn cancel-btn" (click)="selectedBike=null;selectedKey=null;">X</button>
+      <form  #bikeForm="ngForm">
+      	<div class="form-group">
+          <!--<label for="brand">Brand</label>-->
+          <input type="text" class="form-control" id="brand"
+                 required
+                 placeholder="Brand" 
+                 [(ngModel)]="selectedBike.brand" name="brand"
+                 #brand="ngModel" >
+          <div [hidden]="brand.valid || brand.pristine"
+               class="alert alert-danger">
+            Brand is required
+          </div>
+        </div>
+
+        <div class="form-group">
+          <input type="text" class="form-control" id="model"
+                 required
+                 placeholder="Model" 
+                 [(ngModel)]="selectedBike.model" name="model"
+                 #model="ngModel" >
+          <div [hidden]="model.valid || model.pristine"
+               class="alert alert-danger">
+            Model is required
+          </div>
+        </div>
+
+        <div class="form-group">
+          <input type="text" class="form-control" id="year"
+                 required
+                 placeholder="Year" 
+                 [(ngModel)]="selectedBike.year" name="year"
+                 #year="ngModel" >
+          <div [hidden]="year.valid || year.pristine"
+               class="alert alert-danger">
+            Year is required
+          </div>
+        </div>
+
+        <div class="form-group">
+          <select class="form-control"  id="size"
+                  required
+                  [(ngModel)]="selectedBike.size" name="size">
+            <option value="" disabled hidden>Size</option>
+            <option *ngFor="let size of sizes" [value]="size">{{size}}</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <input type="text" class="form-control" id="imgUrl"
+                 required
+                 placeholder="Image Url" 
+                 [(ngModel)]="selectedBike.imgUrl" name="imgUrl"
+                 #imgUrl="ngModel" >
+          <div [hidden]="imgUrl.valid || imgUrl.pristine"
+               class="alert alert-danger">
+            Image URL is required
+          </div>
+        </div>
+
+        <div class="form-group">
+          <input type="text" class="form-control" id="price"
+                 required
+                 placeholder="Price" 
+                 [(ngModel)]="selectedBike.price" name="price"
+                 #price="ngModel" >
+          <div [hidden]="price.valid || price.pristine"
+               class="alert alert-danger">
+            Price is required
+          </div>
+        </div>
+
+      	<button (click)="saveItem()" type="submit" class="btn btn-primary" [disabled]="!bikeForm.form.valid">
+          <span>Save</span>
+        </button>
+        <button class="btn" (click)="selectedBike=null;selectedKey=null;">Cancel</button>
+      	<!--<button (click)="deleteEverything()" class="btn btn-default">Delete All</button>-->
+      </form>
+    </div>
+</div>

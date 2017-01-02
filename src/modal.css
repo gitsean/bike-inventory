@@ -1,0 +1,29 @@
+.modal-wrap{
+    position: absolute;
+    top: 0px;
+    width: 100%;
+    background-color: rgba(255,255,255,0.6);
+}
+
+.modal-content{
+    width: 50%;
+    position: relative;
+    left: 25%;
+    margin-top: 60px;
+    padding: 20px;
+    opacity: 1;
+    background: white;
+    z-index: 999;
+    background-color: white;
+}
+
+.cancel-btn{
+    font-weight: 700;
+    float: right;
+    padding: 4px 9px;
+    border-radius: 14px;
+    background: white;
+    position: relative;
+    bottom: 12px;
+    left: 12px;
+}
