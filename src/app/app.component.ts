@@ -19,7 +19,7 @@ export class AppComponent {
     this.selectedBike = bike;
   }
   saveItem() {
-    if(this.selectedBike !== null){
+    if(this.selectedBike.$key){
       var key = this.selectedBike.$key;
       delete this.selectedBike.$exists;
       delete this.selectedBike.$key;
